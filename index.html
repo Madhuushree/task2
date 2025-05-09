@@ -71,60 +71,53 @@
   <div class="stopwatch-container">
     <div class="time-display" id="time">00:00:00</div>
     <div class="buttons">
-      <button class="start" onclick="startTimer()" title="Start the stopwatch">Start</button>
-      <button class="pause" onclick="pauseTimer()" title="Pause the stopwatch">Pause</button>
-      <button class="reset" onclick="resetTimer()" title="Reset the stopwatch">Reset</button>
-      <button class="lap" onclick="recordLap()" title="Record a lap">Lap</button>
+      <button class="start" onclick="startTimer()">Start</button>
+      <button class="pause" onclick="pauseTimer()">Pause</button>
+      <button class="reset" onclick="resetTimer()">Reset</button>
+      <button class="lap" onclick="recordLap()">Lap</button>
     </div>
     <div class="laps" id="laps"></div>
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      let startTime, elapsedTime = 0, timerInterval = null;
-      let lapCount = 1;
+    let startTime, elapsedTime = 0, timerInterval;
+    const timeDisplay = document.getElementById("time");
+    const lapsContainer = document.getElementById("laps");
 
-      const timeDisplay = document.getElementById("time");
-      const lapsContainer = document.getElementById("laps");
+    function timeToString(time) {
+      let hrs = Math.floor(time / 3600000);
+      let mins = Math.floor((time % 3600000) / 60000);
+      let secs = Math.floor((time % 60000) / 1000);
 
-      function timeToString(time) {
-        let hrs = Math.floor(time / 3600000);
-        let mins = Math.floor((time % 3600000) / 60000);
-        let secs = Math.floor((time % 60000) / 1000);
-        return '${hrs.toString().padStart(2, '0')}: ${mins.toString().padStart(2, '0')}: ${secs.toString().padStart(2, '0')}';
-      }
+      return '${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')};
+    }
 
-      window.startTimer = function () {
-        if (timerInterval) return; // Prevent multiple intervals
-        startTime = Date.now() - elapsedTime;
-        timerInterval = setInterval(() => {
-          elapsedTime = Date.now() - startTime;
-          timeDisplay.textContent = timeToString(elapsedTime);
-        }, 1000);
-      }
+    function startTimer() {
+      startTime = Date.now() - elapsedTime;
+      timerInterval = setInterval(() => {
+        elapsedTime = Date.now() - startTime;
+        timeDisplay.textContent = timeToString(elapsedTime);
+      }, 1000);
+    }
 
-      window.pauseTimer = function () {
-        clearInterval(timerInterval);
-        timerInterval = null;
-      }
+    function pauseTimer() {
+      clearInterval(timerInterval);
+    }
 
-      window.resetTimer = function () {
-        clearInterval(timerInterval);
-        timerInterval = null;
-        elapsedTime = 0;
-        timeDisplay.textContent = "00:00:00";
-        lapsContainer.innerHTML = '';
-        lapCount = 1;
-      }
+    function resetTimer() {
+      clearInterval(timerInterval);
+      timeDisplay.textContent = "00:00:00";
+      elapsedTime = 0;
+      lapsContainer.innerHTML = '';
+    }
 
-      window.recordLap = function () {
-        if (elapsedTime === 0) return;
-        const lapTime = timeToString(elapsedTime);
-        const lapElement = document.createElement("div");
-        lapElement.textContent = 'Lap ${lapCount++}: ${lapTime}';
-        lapsContainer.appendChild(lapElement);
-      }
-    });
+    function recordLap() {
+      if (elapsedTime === 0) return;
+      const lapTime = timeToString(elapsedTime);
+      const lapElement = document.createElement("div");
+      lapElement.textContent = 'Lap: ${lapTime}';
+      lapsContainer.appendChild(lapElement);
+    }
   </script>
 </body>
 </html>
