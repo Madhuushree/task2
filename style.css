@@ -1,0 +1,101 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .stopwatch-container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    color: #fff;
+    width: 320px;
+  }
+  
+  .time-display {
+    font-size: 48px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    letter-spacing: 2px;
+  }
+  
+  .buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+    font-size: 16px;
+    min-width: 80px;
+  }
+  
+  .buttons button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+  
+  .buttons button:active {
+    transform: translateY(0);
+  }
+  
+  .start { background-color: #4caf50; color: white; }
+  .pause { background-color: #f44336; color: white; }
+  .reset { background-color: #2196f3; color: white; }
+  .lap { background-color: #ff9800; color: white; }
+  
+  .laps {
+    margin-top: 20px;
+    max-height: 150px;
+    overflow-y: auto;
+    text-align: left;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+  }
+  
+  .laps div {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 12px;
+    margin: 5px 0;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+  
+  .laps div:nth-child(odd) {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Scrollbar styling */
+  .laps::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .laps::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.1);
+    border-radius: 10px;
+  }
+  
+  .laps::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.3);
+    border-radius: 10px;
+  }
+  
+  .laps::-webkit-scrollbar-thumb:hover {
+    background: rgba(255,255,255,0.4);
+  }
